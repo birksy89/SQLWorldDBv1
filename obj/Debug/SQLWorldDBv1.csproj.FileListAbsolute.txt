@@ -1,0 +1,5 @@
+C:\inetpub\wwwroot\DNN732-2014-08-30\bin\SQLWorldDBv1.dll
+C:\inetpub\wwwroot\DNN732-2014-08-30\bin\SQLWorldDBv1.pdb
+C:\inetpub\wwwroot\DNN732-2014-08-30\DesktopModules\SQLWorldDBv1\obj\Debug\SQLWorldDBv1.dll
+C:\inetpub\wwwroot\DNN732-2014-08-30\DesktopModules\SQLWorldDBv1\obj\Debug\SQLWorldDBv1.pdb
+C:\inetpub\wwwroot\DNN732-2014-08-30\DesktopModules\SQLWorldDBv1\obj\Debug\SQLWorldDBv1.csprojResolveAssemblyReference.cache

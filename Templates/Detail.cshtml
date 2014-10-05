@@ -1,0 +1,41 @@
+﻿@inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
+
+
+@{
+    var db = Database.Open("SiteSqlServer");
+
+
+    string value = Request.QueryString["CCode"];
+
+    //@value;
+
+          foreach (var dbRow in db.Query("SELECT * FROM country WHERE code='" + value + "'"))
+          {
+
+              string dbRowName = dbRow.Name;
+              string Name = dbRowName.TrimEnd();
+
+              var dbRowSurfaceArea = dbRow.SurfaceArea;
+              string SurfaceArea = dbRowSurfaceArea.ToString("n");
+
+              string mapURL = "https://www.google.co.uk/maps/place/" + Name;
+              string flagURL = "http://www.sciencekids.co.nz/images/pictures/flags96/" + Name + ".jpg";
+
+
+            <div class="col-md-3">
+               
+                <img src="@flagURL" onerror="this.src = 'http://www.placehold.it/96x69'" />
+                <h1>@Name</h1>
+                <p>Surface Area: @SurfaceArea </p>
+                <a href="@mapURL">Map</a>
+                
+                <iframe width="600" height="450" frameborder="0" style="border:0"
+                        src="https://www.google.com/maps/embed/v1/place?q=@Name&key=AIzaSyDHPO6bNG225SK_Jnohf4xQtC-1Ew4V-Ec">
+                </iframe>
+            </div>
+
+          }
+
+}
+
+

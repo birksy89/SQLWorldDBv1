@@ -1,0 +1,45 @@
+﻿@inherits DotNetNuke.Web.Razor.DotNetNukeWebPage<dynamic>
+
+
+@{
+    
+    string CurrentURL = DotNetNuke.Entities.Tabs.TabController.CurrentPage.FullUrl; 
+    
+    var db = Database.Open("SiteSqlServer");
+    
+    string SortBy = Request.QueryString["SortBy"];
+
+    //string dbQuery = "SELECT * FROM country ORDER BY "+ SortBy; // ASC | DSC
+
+
+    string dbQuery = "SELECT * FROM country";
+    
+
+    foreach (var dbRow in db.Query(dbQuery))
+    {
+
+        string dbRowName = dbRow.Name;
+        string Name = dbRowName.TrimEnd();
+
+        string dbCCode = dbRow.Code;
+        string CCode = dbCCode.TrimEnd();
+
+        var dbRowSurfaceArea = dbRow.SurfaceArea;
+        string SurfaceArea = dbRowSurfaceArea.ToString("n");
+
+        string mapURL = "https://www.google.co.uk/maps/place/" + Name;
+        string flagURL = "http://www.sciencekids.co.nz/images/pictures/flags96/" + Name + ".jpg";
+
+
+        <div class="col-md-3" style="height:250px; overflow:hidden;">
+
+            @*<img src="@flagURL" onerror="this.src = 'http://www.placehold.it/96x69'" />*@
+            <a href="@CurrentURL/CCode/@CCode"><h1>@Name</h1></a>
+            <p>Surface Area: @SurfaceArea </p>
+            <a href="@mapURL">Map</a>
+
+        </div>
+
+    }
+
+}
