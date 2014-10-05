@@ -7,12 +7,15 @@
     
     var db = Database.Open("SiteSqlServer");
     
-    string SortBy = Request.QueryString["SortBy"];
+    string SortBy;
 
-    //string dbQuery = "SELECT * FROM country ORDER BY "+ SortBy; // ASC | DSC
+    SortBy = string.IsNullOrEmpty(Request.QueryString["SortBy"]) ? "Name" : Request["SortBy"];
+
+   // SortBy = Request.QueryString["SortBy"];
 
 
-    string dbQuery = "SELECT * FROM country";
+    string dbQuery = "SELECT * FROM country ORDER BY "+ SortBy; // ASC | DSC
+    //string dbQuery = "SELECT * FROM country"; - Basic Query
     
 
     foreach (var dbRow in db.Query(dbQuery))
@@ -33,10 +36,12 @@
 
         <div class="col-md-3" style="height:250px; overflow:hidden;">
 
+
             @*<img src="@flagURL" onerror="this.src = 'http://www.placehold.it/96x69'" />*@
             <a href="@CurrentURL/CCode/@CCode"><h1>@Name</h1></a>
             <p>Surface Area: @SurfaceArea </p>
             <a href="@mapURL">Map</a>
+            @SortBy
 
         </div>
 

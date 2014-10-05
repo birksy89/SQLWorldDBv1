@@ -47,6 +47,7 @@ namespace Christoc.Modules.SQLWorldDBv1
         {
             try
             {
+                
 
                 if (CountryCode != "")
                 {
@@ -65,9 +66,7 @@ namespace Christoc.Modules.SQLWorldDBv1
                     RazorDiv1.Controls.Add(new LiteralControl(Server.HtmlDecode(writer.ToString())));
                 }
 
-               
 
-               
                 
             }
             catch (Exception exc) //Module failed to load
@@ -75,6 +74,17 @@ namespace Christoc.Modules.SQLWorldDBv1
                 Exceptions.ProcessModuleLoadException(this, exc);
             }
         }
-       
+
+        protected void btnName_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(DotNetNuke.Entities.Tabs.TabController.CurrentPage.FullUrl + "/SortBy/Name");
+        }
+
+        protected void btnArea_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(DotNetNuke.Entities.Tabs.TabController.CurrentPage.FullUrl + "/SortBy/SurfaceArea");
+        }
+
+
     }
 }
