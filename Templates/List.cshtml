@@ -14,34 +14,35 @@
    // SortBy = Request.QueryString["SortBy"];
 
 
-    string dbQuery = "SELECT * FROM country ORDER BY "+ SortBy; // ASC | DSC
-    //string dbQuery = "SELECT * FROM country"; - Basic Query
+    string dbQuery;
+
+    //dbQuery = "SELECT * FROM country"; - Basic Query
+    //dbQuery = "SELECT * FROM country ORDER BY "+ SortBy; // ASC | DSC
+    
+    dbQuery = "SELECT * FROM country INNER JOIN city ON city.ID= country.Capital ORDER BY country."+ SortBy; //SQL Join City & Country
+    
+    
     
 
     foreach (var dbRow in db.Query(dbQuery))
     {
 
-        string dbRowName = dbRow.Name;
-        string Name = dbRowName.TrimEnd();
+        string CountryName = dbRow.Name.TrimEnd();
 
-        string dbCCode = dbRow.Code;
-        string CCode = dbCCode.TrimEnd();
+        string CCode = dbRow.Code.TrimEnd();
 
-        var dbRowSurfaceArea = dbRow.SurfaceArea;
-        string SurfaceArea = dbRowSurfaceArea.ToString("n");
+        string SurfaceArea = dbRow.SurfaceArea.ToString("n");
 
-        string mapURL = "https://www.google.co.uk/maps/place/" + Name;
-        string flagURL = "http://www.sciencekids.co.nz/images/pictures/flags96/" + Name + ".jpg";
+        //string mapURL = "https://www.google.co.uk/maps/place/" + CountryName;
+        
+        string flagURL = "http://www.sciencekids.co.nz/images/pictures/flags96/" + CountryName.Replace(" ","_") + ".jpg"; //Replaces spaces with underscores for better accuracy
 
 
         <div class="col-md-3" style="height:250px; overflow:hidden;">
 
-
-            @*<img src="@flagURL" onerror="this.src = 'http://www.placehold.it/96x69'" />*@
-            <a href="@CurrentURL/CCode/@CCode"><h1>@Name</h1></a>
+            <img src="@flagURL" onerror="this.src = 'http://www.placehold.it/96x69'" />
+            <a href="@CurrentURL/CCode/@CCode"><h1>@CountryName</h1></a>
             <p>Surface Area: @SurfaceArea </p>
-            <a href="@mapURL">Map</a>
-            @SortBy
 
         </div>
 
