@@ -19,7 +19,7 @@
     //dbQuery = "SELECT * FROM country"; - Basic Query
     //dbQuery = "SELECT * FROM country ORDER BY "+ SortBy; // ASC | DSC
     
-    dbQuery = "SELECT * FROM country INNER JOIN city ON city.ID= country.Capital ORDER BY country."+ SortBy; //SQL Join City & Country
+    dbQuery = "SELECT *, city.Population as 'CityPop' FROM country INNER JOIN city ON city.ID= country.Capital ORDER BY country."+ SortBy; //SQL Join City & Country
     
     
     
@@ -36,13 +36,25 @@
         //string mapURL = "https://www.google.co.uk/maps/place/" + CountryName;
         
         string flagURL = "http://www.sciencekids.co.nz/images/pictures/flags96/" + CountryName.Replace(" ","_") + ".jpg"; //Replaces spaces with underscores for better accuracy
+        
+        // New DB ROWs
+
+        string CountryPop = dbRow.Population.ToString("n");
+        string CityPop = dbRow.CityPop.ToString("n");
+        
 
 
         <div class="col-md-3" style="height:250px; overflow:hidden;">
 
-            <img src="@flagURL" onerror="this.src = 'http://www.placehold.it/96x69'" />
-            <a href="@CurrentURL/CCode/@CCode"><h1>@CountryName</h1></a>
+            <a href="@CurrentURL/CCode/@CCode">
+                <img src="@flagURL" onerror="this.src = 'http://www.placehold.it/96x69'" />
+                <h1>@CountryName</h1>
+            </a>
+
             <p>Surface Area: @SurfaceArea </p>
+
+            <p>Population: @CountryPop</p>
+            <p>Capital City: @CityPop</p>
 
         </div>
 
