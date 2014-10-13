@@ -44,5 +44,9 @@
       <path>Documentation/</path>
       <name>Documentation.html</name>
     </file>
+    <file>
+      <path>Templates/</path>
+      <name>Example.cshtml</name>
+    </file>
   </files>
 </dotnetnuke>

@@ -39,7 +39,7 @@
                 <p>Surface Area: @SurfaceArea </p>
 
                 <p>Population: @CountryPop</p>
-                <p>Capital City: @CountryCapital with a Population of @CityPop</p>
+                <p>Capital City: <b>@CountryCapital</b> with a Population of <b>@CityPop</b></p>
                 
             </div>
 
@@ -49,6 +49,36 @@
                         src="https://www.google.com/maps/embed/v1/place?q=@CountryName&key=AIzaSyDHPO6bNG225SK_Jnohf4xQtC-1Ew4V-Ec"></iframe>
             </div>
         </div>
+    
+    /////////////////////////////////////////////////////////////////////////////////////////
+
+
+        string dbImgQuery = "SELECT URL as 'imgURL' FROM countryImages WHERE CCode='AFG';"; //SQL Join City & Country
+
+        foreach (var dbImgRow in db.Query(dbImgQuery))
+    {
+            
+            
+            
+        <img src="/DesktopModules/@Dnn.Module.DesktopModule.FolderName/Images/@dbImgRow.imgURL" />
+            
+            
+
+            
+        
+    
+    
+       }
+    
+    if(1==1)
+    {
+        <p>True</p>
+    }
+    
+            //foreach (var dbRow in db.Query(dbQuery))
+            //{
+        
+            //}
 
     }
 
