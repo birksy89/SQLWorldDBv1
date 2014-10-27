@@ -41,7 +41,7 @@ namespace Christoc.Modules.SQLWorldDBv1
     /// 
     /// </summary>
     /// -----------------------------------------------------------------------------
-    public partial class View : SQLWorldDBv1ModuleBase
+    public partial class View : SQLWorldDBv1ModuleBase, IActionable
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -84,6 +84,23 @@ namespace Christoc.Modules.SQLWorldDBv1
         protected void btnArea_Click(object sender, EventArgs e)
         {
             Response.Redirect(DotNetNuke.Entities.Tabs.TabController.CurrentPage.FullUrl + "/SortBy/SurfaceArea");
+        }
+
+
+
+        public ModuleActionCollection ModuleActions
+        {
+            get
+            {
+                var actions = new ModuleActionCollection
+                    {
+                        {
+                            GetNextActionID(), Localization.GetString("EditModule", LocalResourceFile), "", "", "",
+                            EditUrl(), false, SecurityAccessLevel.Edit, true, false
+                        }
+                    };
+                return actions;
+            }
         }
 
 

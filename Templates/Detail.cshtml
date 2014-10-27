@@ -29,56 +29,52 @@
 
         string CountryCapital = dbRow.CityName;
 
-
+    <div class="row">
         <div class="col-md-12">
 
-            <div class="col-md-6">
-                <h1>@CountryName</h1>
-                <img src="@flagURL" onerror="this.src = 'http://www.placehold.it/96x69'" />
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>@CountryName</h1>
+                    <img src="@flagURL" onerror="this.src = 'http://www.placehold.it/96x69'" />
 
-                <p>Surface Area: @SurfaceArea </p>
+                    <p>Surface Area: @SurfaceArea </p>
 
-                <p>Population: @CountryPop</p>
-                <p>Capital City: <b>@CountryCapital</b> with a Population of <b>@CityPop</b></p>
-                
-            </div>
+                    <p>Population: @CountryPop</p>
+                    <p>Capital City: <b>@CountryCapital</b> with a Population of <b>@CityPop</b></p>
 
-            <div class="col-md-6">
+                </div>
 
-                <iframe width="100%" height="450" frameborder="0" style="border:0"
+                <div class="col-md-6">
+
+                    <iframe width="100%" height="450" frameborder="0" style="border:0"
                         src="https://www.google.com/maps/embed/v1/place?q=@CountryName&key=AIzaSyDHPO6bNG225SK_Jnohf4xQtC-1Ew4V-Ec"></iframe>
+                </div>
+
             </div>
         </div>
+    </div>
     
-    /////////////////////////////////////////////////////////////////////////////////////////
+    <hr />
+        /////////////////////////////////////////////////////////////////////////////////////////
 
-
-        string dbImgQuery = "SELECT URL as 'imgURL' FROM countryImages WHERE CCode='AFG';"; //SQL Join City & Country
+    <div class="row">
+        @{
+        string dbImgQuery = "SELECT URL as 'imgURL', * FROM countryImages WHERE CCode='" + value + "'"; //SQL Join City & Country
 
         foreach (var dbImgRow in db.Query(dbImgQuery))
-    {
-            
-            
-            
-        <img src="/DesktopModules/@Dnn.Module.DesktopModule.FolderName/Images/@dbImgRow.imgURL" />
-            
-            
+        {
+            <div class="col-md-4">
+                <img class="img-responsive" src="/DesktopModules/@Dnn.Module.DesktopModule.FolderName/Images/@dbImgRow.imgURL" />
 
-            
-        
-    
-    
-       }
-    
-    if(1==1)
-    {
-        <p>True</p>
-    }
-    
-            //foreach (var dbRow in db.Query(dbQuery))
-            //{
-        
-            //}
+                <p>@dbImgRow.Name</p>
+
+            </div>
+             
+           
+        }
+        }
+
+    </div>
 
     }
 
