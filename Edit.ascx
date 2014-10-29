@@ -68,18 +68,39 @@
                 </tr>
             </table>
 
-            <asp:GridView ID="gvImages" runat="server" OnSelectedIndexChanged="gvImages_SelectedIndexChanged" >
-                <Columns>
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:LinkButton ID="lbtnDeleteImg" CommandName="DeleteImg" runat="server" Text="Delete" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                </Columns>
+            <asp:GridView ID="gvImages" runat="server" AutoGenerateColumns="False" DataKeyNames="ID" DataSourceID="SqlDataSource1">
 
+
+                <Columns>
+                    <asp:CommandField ShowDeleteButton="True"></asp:CommandField>
+                    <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" SortExpression="ID"></asp:BoundField>
+                    <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name"></asp:BoundField>
+                    <asp:BoundField DataField="URL" HeaderText="URL" SortExpression="URL"></asp:BoundField>
+                    <asp:BoundField DataField="CCode" HeaderText="CCode" SortExpression="CCode"></asp:BoundField>
+                </Columns>
             </asp:GridView>
 
 
+            <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:SiteSqlServer %>' SelectCommand="SELECT * FROM [countryImages] WHERE ([CCode] = @CCode)" DeleteCommand="DELETE FROM [countryImages] WHERE [ID] = @ID" InsertCommand="INSERT INTO [countryImages] ([ID], [Name], [URL], [CCode]) VALUES (@ID, @Name, @URL, @CCode)" UpdateCommand="UPDATE [countryImages] SET [Name] = @Name, [URL] = @URL, [CCode] = @CCode WHERE [ID] = @ID">
+                <DeleteParameters>
+                    <asp:Parameter Name="ID" Type="Int32"></asp:Parameter>
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter Name="ID" Type="Int32"></asp:Parameter>
+                    <asp:Parameter Name="Name" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="URL" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="CCode" Type="String"></asp:Parameter>
+                </InsertParameters>
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="txtSubjectId" PropertyName="Text" Name="CCode" Type="String"></asp:ControlParameter>
+                </SelectParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="Name" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="URL" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="CCode" Type="String"></asp:Parameter>
+                    <asp:Parameter Name="ID" Type="Int32"></asp:Parameter>
+                </UpdateParameters>
+            </asp:SqlDataSource>
             <div style="clear:both"></div>
 
             <br />

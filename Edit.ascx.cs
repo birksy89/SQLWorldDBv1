@@ -69,28 +69,28 @@ namespace Christoc.Modules.SQLWorldDBv1
         }
 
         //Call This method to Pull the images through
-        private void BindImageData()
-        {
-            using (SqlConnection sqlCon = new SqlConnection(conn))
-            {
-                using (SqlCommand cmd = new SqlCommand())
-                {
+        //private void BindImageData()
+        //{
+        //    using (SqlConnection sqlCon = new SqlConnection(conn))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand())
+        //        {
 
-                    string tempCCode = txtSubjectId.Text;
+        //            string tempCCode = txtSubjectId.Text;
 
-                    cmd.CommandText = "SELECT * FROM countryImages WHERE CCode='" + tempCCode + "'";
-                    //cmd.Parameters.AddWithValue("@CCode", txtSubjectId.Text);
-                    cmd.Connection = sqlCon;
-                    sqlCon.Open();
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    gvImages.DataSource = dt;
-                    gvImages.DataBind();
-                    sqlCon.Close();
-                }
-            }
-        }
+        //            cmd.CommandText = "SELECT * FROM countryImages WHERE CCode='" + tempCCode + "'";
+        //            //cmd.Parameters.AddWithValue("@CCode", txtSubjectId.Text);
+        //            cmd.Connection = sqlCon;
+        //            sqlCon.Open();
+        //            SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //            DataTable dt = new DataTable();
+        //            da.Fill(dt);
+        //            gvImages.DataSource = dt;
+        //            gvImages.DataBind();
+        //            sqlCon.Close();
+        //        }
+        //    }
+        //}
 
         //Insert click event to insert new record to database
         protected void btnInsert_Click(object sender, EventArgs e)
@@ -226,7 +226,7 @@ Region=@Region,SurfaceArea=@SurfaceArea WHERE Code=@Code";
             //make invisible Insert button during update/delete
             btnInsert.Visible = false;
 
-            BindImageData();
+            //BindImageData();
         }
 
         //call to reset all form controls
@@ -251,25 +251,7 @@ Region=@Region,SurfaceArea=@SurfaceArea WHERE Code=@Code";
             Response.Redirect(DotNetNuke.Common.Globals.NavigateURL());
         }
 
-        protected void gvImages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Response.Write("Test");
-
-
-            using (SqlConnection sqlCon = new SqlConnection(conn))
-            {
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandText = @"DELETE FROM countryImages WHERE ID=@ID";
-                    cmd.Parameters.AddWithValue("@ID", 5);
-                    cmd.Connection = sqlCon;
-                    sqlCon.Open();
-                    cmd.ExecuteNonQuery();
-                    sqlCon.Close();
-                }
-            }
-
-        }
+   
 
        
     }
